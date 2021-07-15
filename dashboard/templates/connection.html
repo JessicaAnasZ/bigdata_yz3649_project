@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Network for Important Authors</title>
+</head>
+<body>
+<h1>Network for Important Authors</h1>
+<div id='dashboard'></div>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="{% static 'js/connection.js' %}"></script>
+
+<div style="padding:10px">
+    
+    <p> Please enter the category in computer science field that you are interested in</p>
+    <p> You can choose from AI,CL,CC,CE,CG,GT,CV,CY,CR,DS,DB,DL,DM AND DC </p>
+    <p> Please refer to http://arxitics.com/help/categories?group=cs for each acronym </p>
+    <form action="/connection" method="post" id = 'form2'>
+            {% csrf_token %}
+            <input type="text" name="category" id ='authors' placeholder="AI">
+            <input type="submit" value="Submit" id="btn">
+
+    </form>
+
+</div>
+
+<script>
+    var nodes = {{ n | safe }}
+    var edges = {{ e | safe}}
+
+    connection(nodes, edges)
+</script>
+</body>
+</html>
